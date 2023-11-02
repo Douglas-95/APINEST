@@ -1,5 +1,13 @@
-export class CreateUserDataDto{
-    readonly username: String;
-    readonly password: String;
-    readonly email: String;
+import { IsNotEmpty } from 'class-validator';
+
+export class CreateUserDto{
+    @IsNotEmpty()
+    username: String;
+    
+    @IsNotEmpty()
+    password: String;
+
+    @IsNotEmpty()
+    email: String;
+
 }
