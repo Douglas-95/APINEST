@@ -9,7 +9,7 @@ export class UserService{
     constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>){}
      
     async createUser(createUserDto: CreateUserDto): Promise<User>{
-        const emailexists = await this.userModel.findOne({ email: createUserDto});
+        const emailexists = await this.userModel.findOne({ email: createUserDto.email});
 
         if(emailexists){
             throw new ConflictException('Email informado já existe!');
@@ -18,9 +18,5 @@ export class UserService{
             ...createUserDto
         })
         return await newUser.save()
-    }
-    
-    async findAll(): Promise<User []>{
-        return await this.userModel.find().exec()
     }
 }
